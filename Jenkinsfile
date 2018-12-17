@@ -81,6 +81,7 @@ pipeline {
             ]
           ]
         ) 
+        /*
         {
           container('jmeter') {
             script {
@@ -103,7 +104,7 @@ pipeline {
             }
           }
         }
-
+        */
         perfSigDynatraceReports(
           envId: 'Dynatrace Tenant', 
           nonFunctionalFailure: 1, 
