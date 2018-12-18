@@ -45,9 +45,9 @@ spec:
           httpGet:
             path: /health
             port: 8080
-          initialDelaySeconds: 120
+          initialDelaySeconds: 121
           periodSeconds: 10
-          timeoutSeconds: 15
+          timeoutSeconds: 14
       volumes:
         - name: tmp-volume
           emptyDir:
