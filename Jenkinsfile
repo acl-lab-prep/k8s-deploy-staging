@@ -64,7 +64,7 @@ pipeline {
     stage('Run production ready e2e check in staging') {
       steps {
         echo "Waiting for the service to start..."
-        sleep 150
+        sleep 120
 
         recordDynatraceSession(
           envId: 'Dynatrace Tenant',
@@ -81,7 +81,7 @@ pipeline {
             ]
           ]
         ) 
-        /*
+        
         {
           container('jmeter') {
             script {
@@ -104,7 +104,7 @@ pipeline {
             }
           }
         }
-        */
+       
         perfSigDynatraceReports(
           envId: 'Dynatrace Tenant', 
           nonFunctionalFailure: 1, 
