@@ -31,28 +31,8 @@ pipeline {
         }
       }
     }
-
-    stage('DT Deploy Event') {
-      steps {
-        createDynatraceDeploymentEvent(
-          envId: 'Dynatrace Tenant',
-          tagMatchRules: [
-            [
-              meTypes: [
-                [meType: 'SERVICE']
-              ],
-              tags: [
-                [context: 'CONTEXTLESS', key: 'app', value: "${env.APP_NAME}"],
-                [context: 'CONTEXTLESS', key: 'environment', value: 'staging']
-              ]
-            ]
-          ]) {
-        }
-      }
-    }
-
     /*
-    stage('DT Deploy Event') {
+    stage('Send Dynatrace a Deploy Event') {
       steps {
         container("curl") {
           // send custom deployment event to Dynatrace
@@ -64,7 +44,7 @@ pipeline {
     stage('Run production ready e2e check in staging') {
       steps {
         echo "Waiting for the service to start..."
-        sleep 120
+        sleep 150
 
         recordDynatraceSession(
           envId: 'Dynatrace Tenant',
@@ -81,7 +61,6 @@ pipeline {
             ]
           ]
         ) 
-        
         {
           container('jmeter') {
             script {
@@ -104,7 +83,7 @@ pipeline {
             }
           }
         }
-       
+
         perfSigDynatraceReports(
           envId: 'Dynatrace Tenant', 
           nonFunctionalFailure: 1, 
